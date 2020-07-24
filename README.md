@@ -19,6 +19,8 @@ exposure no yes
      yes  b   a
 ```
 
+It can also take two dummy variables that are coded 0/1. (e.g., `ct_2x2(x = c("var1", "var2"), dataset = dat)`)
+
 It will do the following in a list:
  * `cross_tab`: reproduce the above 2x2 table
  * `stats`: a tibble with OR (95% CI), RR, RD, sensitivity, and specificity estimates
