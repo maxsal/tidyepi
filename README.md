@@ -5,6 +5,8 @@ I'm creating a repository of scripts that I've created to help explore data in `
 Currently, I am working on functions related to quick 2x2 contingency table analysis and single-variable summaries.
 
 Let me know what you think!
+* :bird: [Tweet @MaxSalTweets](https://twitter.com/MaxSalTweets)
+* :inbox_tray: [mmsalva@umich.edu](mailto:mmsalva@umich.edu)
 
 ## `ct_2x2` for 2x2 contigency tables
 
@@ -21,7 +23,7 @@ It will do the following in a list:
  * `cross_tab`: reproduce the above 2x2 table
  * `stats`: a tibble with OR (95% CI), RR, RD, sensitivity, and specificity estimates
  * `chisq_test`: results from `chisq.test`
- 
+
 
 ## `tell_me` for quick single-variable summaries
 
@@ -38,4 +40,3 @@ It takes the following arguments `tell_me(dataset, var, plots = TRUE)`. In `tidy
 dataset %>%
   tell_me(var)
 ```
-
