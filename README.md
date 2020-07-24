@@ -1,12 +1,12 @@
 # Welcome to `tidyepi`!!!
 
-I'm creating a repository of scripts that I've created to help explore data in `R` using `tidyverse`.
+I'm creating a repository of scripts that I've created to help :mag: explore data in `R` using `tidyverse`.
 
 Currently, I am working on functions related to quick 2x2 contingency table analysis and single-variable summaries.
 
 Let me know what you think!
-* :bird: [Tweet @MaxSalTweets](https://twitter.com/MaxSalTweets)
-* :inbox_tray: [mmsalva@umich.edu](mailto:mmsalva@umich.edu)
+:bird: Tweet [@MaxSalTweets](https://twitter.com/MaxSalTweets)
+:inbox_tray: [mmsalva@umich.edu](mailto:mmsalva@umich.edu)
 
 ## `ct_2x2` for 2x2 contigency tables
 
