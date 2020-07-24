@@ -1,6 +1,8 @@
 library(tidyverse)
+library(glue)
 
-ct_2x2 <- function(x) {
+ct_2x2 <- function(x,
+                   conf = 0.95) {
   
   out <- list()
   
@@ -28,8 +30,8 @@ ct_2x2 <- function(x) {
     )
   
   or <- (a * d) / (b * c)
-  or_hi <- exp(log(or) + qnorm(0.975)*sqrt((1/a) + (1/b) + (1/c) + (1/d)))
-  or_lo <- exp(log(or) - qnorm(0.975)*sqrt((1/a) + (1/b) + (1/c) + (1/d)))
+  or_hi <- exp(log(or) + qnorm(conf + ((1 - conf)/2)) * sqrt((1/a) + (1/b) + (1/c) + (1/d)))
+  or_lo <- exp(log(or) - qnorm(conf + ((1 - conf)/2)) * sqrt((1/a) + (1/b) + (1/c) + (1/d)))
   
   p0 <- c / f
   p1 <- a / e
@@ -47,7 +49,7 @@ ct_2x2 <- function(x) {
   exp_d <- (f * h) / n
   
   out[["stats"]] <- tibble(
-    "stat" = c("odds_ratio", "or_lo", "or_hi", "risk_diff", "risk_ratio",
+    "stat" = c("odds_ratio", glue("or_{conf*100}_lo"), glue("or_{conf*100}_hi"), "risk_diff", "risk_ratio",
                "sensitivity", "specificity"),
     "value" = c(or, or_lo, or_hi, rd, rr, sensitivity, specificity)
   )
