@@ -1,4 +1,4 @@
-# Welcome to `epi_functions`!!!
+# Welcome to `tidyepi`!!!
 
 I'm creating a repository of scripts that I've created to help explore data in `R` using `tidyverse`.
 
