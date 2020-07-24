@@ -9,7 +9,7 @@ tell_me <- function(dataset, var, plots = TRUE,
                     percentiles = c(0.01, 0.05, 0.1, 0.25, 0.5,
                                     0.75, 0.9, 0.95, 0.99)) {
   
-  if (!is.numeric(dataset[[var]])) {
+  if (!is.numeric(dataset %>% pull({{ var }}))) {
     
     print(glue("{var} is not numeric. Please provide a numeric variable."))
     
@@ -36,31 +36,31 @@ tell_me <- function(dataset, var, plots = TRUE,
       stat  = c("min", "mean", "median", "max", "sd", "var",
                 "n_obs", "n_missing"),
       value = c(
-        min(dataset[[var]]),
-        mean(dataset[[var]], na.rm = T),
-        median(dataset[[var]]),
-        max(dataset[[var]]),
-        sd(dataset[[var]]),
-        var(dataset[[var]]),
-        length(na.omit(dataset[[var]])),
-        sum(is.na(dataset[[var]]))
+        dataset %>% pull({{ var }}) %>% min(),
+        dataset %>% pull({{ var }}) %>% mean(., na.rm = T),
+        dataset %>% pull({{ var }}) %>% median(),
+        dataset %>% pull({{ var }}) %>% max(),
+        dataset %>% pull({{ var }}) %>% sd(),
+        dataset %>% pull({{ var }}) %>% stats::var(),
+        dataset %>% pull({{ var }}) %>% na.omit() %>% length(),
+        dataset %>% pull({{ var }}) %>% is.na() %>% sum()
       )
     )
     
-    out[["quantiles"]] <- quantile(dataset[[var]],
+    out[["quantiles"]] <- quantile(dataset %>% pull({{ var }}),
                                    probs = percentiles) %>%
       t() %>% t() %>% as.data.frame() %>% rownames_to_column(var = "quantile") %>%
       rename(value = V1) %>% as_tibble() %>% mutate(quantile = gsub("%", "_pct", quantile))
     
     out[["ends"]] <- tibble(
-      smallest_five = head(sort(dataset[[var]]), 5),
-      largest_five  = tail(sort(dataset[[var]]), 5)
+      smallest_five = head(sort(dataset %>% pull({{ var }})), 5),
+      largest_five  = tail(sort(dataset %>% pull({{ var }})), 5)
     )
     
     if (plots == TRUE) {
       
       out[["hist"]] <- dataset %>%
-        ggplot(aes(x = .data[[var]])) +
+        ggplot(aes(x = {{ var }})) +
         geom_vline(xintercept = out[["summary"]] %>%
                      filter(stat == "mean") %>%
                      pull(value), linetype = 2, size = 1, color = "#eb4034") +
@@ -69,8 +69,8 @@ tell_me <- function(dataset, var, plots = TRUE,
                      pull(value), linetype = 2, size = 1, color = "#3434eb") +
         geom_histogram(bins = 30) +
         labs(
-          title   = glue("Histogram of {var}"),
-          x       = glue("{var}"),
+          title   = glue("Histogram of {substitute(var)}"),
+          x       = glue("{substitute(var)}"),
           y       = "Count",
           caption = glue("**{out[['summary']] %>%
                                filter(stat == 'n_obs') %>%
@@ -80,11 +80,11 @@ tell_me <- function(dataset, var, plots = TRUE,
         my_theme
       
       out[["qq_plt"]] <- dataset %>%
-        ggplot(aes(sample = .data[[var]])) +
+        ggplot(aes(sample = {{ var }})) +
         stat_qq_line(alpha = 0.3) +
         stat_qq() +
         labs(
-          title = glue("qq-plot for {var}"),
+          title = glue("qq-plot for {substitute(var)}"),
           x     = "Theoretical",
           y     = "Sample"
         ) +
