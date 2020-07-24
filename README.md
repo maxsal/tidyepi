@@ -5,8 +5,8 @@ I'm creating a repository of scripts that I've created to help :mag: explore dat
 Currently, I am working on functions related to quick 2x2 contingency table analysis and single-variable summaries.
 
 Let me know what you think!
-:bird: Tweet [@MaxSalTweets](https://twitter.com/MaxSalTweets)
-:inbox_tray: [mmsalva@umich.edu](mailto:mmsalva@umich.edu)
+* :bird: Tweet [@MaxSalTweets](https://twitter.com/MaxSalTweets)
+* :inbox_tray: [mmsalva@umich.edu](mailto:mmsalva@umich.edu)
 
 ## `ct_2x2` for 2x2 contigency tables
 
