@@ -35,8 +35,8 @@ num_by_num <- function(dataset, var1, var2,
     method      = tmp_corr$method
     )
   
-  n_complete <- dim(dataset)[1] - (dim(dataset)[1] - dim(dataset %>% drop_na())[1])
-  n_missing  <- dim(dataset)[1] - dim(dataset %>% drop_na())[1]
+  n_complete <- dim(dataset)[1] - (dim(dataset  %>% select({{ var1 }}, {{ var2 }}))[1] - dim(dataset %>% select({{ var1 }}, {{ var2 }}) %>%  drop_na())[1])
+  n_missing  <- dim(dataset)[1] - dim(dataset  %>% select({{ var1 }}, {{ var2 }}) %>% drop_na())[1]
 
   out[["plot"]] <- dataset %>%
     drop_na() %>%
