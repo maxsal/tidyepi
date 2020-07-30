@@ -8,6 +8,8 @@ Let me know what you think!
 * :bird: Tweet [@MaxSalTweets](https://twitter.com/MaxSalTweets)
 * :inbox_tray: [mmsalva@umich.edu](mailto:mmsalva@umich.edu)
 
+:warning: **These are works in progress and will possibly contain errors!** :warning:
+
 ## `ct_2x2` for 2x2 contigency tables
 
 Currently, this function takes a four number vector `c(a, b, c, d)` that corresponds to the following 2x2 table set-up:
@@ -27,7 +29,7 @@ It will do the following in a list:
  * `chisq_test`: results from `chisq.test`
 
 
-## `tell_me` for quick single-variable summaries
+## `univar` for quick single-variable summaries
 
 Currently, this function takes a numeric variable and outputs the following in a list:
 
@@ -37,8 +39,8 @@ Currently, this function takes a numeric variable and outputs the following in a
 * `hist`: histogram of variable with mean and median lines and number of non-missing observations in caption
 * `qq_plt`: qqplot of variable
 
-It takes the following arguments `tell_me(dataset, var, plots = TRUE)`. In `tidyverse`-style, this can be piped such that:
+It takes the following arguments `univar(dataset, var, plots = TRUE)`. In `tidyverse`-style, this can be piped such that:
 ```
 dataset %>%
-  tell_me(var)
+  univar(var)
 ```
